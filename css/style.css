@@ -1,0 +1,257 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+hr{
+    margin : 10px 0;
+    border: 1px solid #DDD;
+}
+.no-click{
+    pointer-events: none;
+}
+/*Start Container  of all game*/
+.container{
+    width: 800px;
+    margin: 40px auto 0;
+    padding: 10px;
+    position: relative;
+}
+/*End Container  of all game*/
+/*Start game information*/
+.container .game-info{
+    display: flex;
+}
+.container .game-info .game-name{
+    width: 50%;
+    justify-items: right;
+    background-color: #FFF;
+    padding: 10px;
+
+}
+.container .game-info .game-category{
+    width: 50%;
+    justify-items: right;
+    text-align: right;
+    background-color: #f6f6f6;
+    padding: 10px;
+}
+.container .game-info .game-category span{
+    color: #E91E63;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+/*End game information*/
+/*Start game raw of drawing left and letter right*/
+.container .row{
+    display: flex;
+}
+.container .row .hangman-draw{
+    width: 50%;
+    height: 324px;
+    background-color: #f6f6f6;
+    padding: 10px;
+}
+.container .row .hangman-draw .drawing{
+    width: 60px;
+    height: 280px;
+    position: relative;
+    border-bottom: 4px solid #222;
+    left: 30%;
+    transform: translateX(-30%);
+    display: none;
+}
+.container .row .hangman-draw .drawing .stand:before{
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background-color: #222;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+}
+.container .row .hangman-draw .drawing .hang{
+    display: none;
+}
+.container .row .hangman-draw .drawing .hang::before{
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    background-color: #222;
+    left: 30px;
+    top: 30px;
+}
+.container .row .hangman-draw .drawing .hang::after{
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 30px;
+    background-color: #222;
+    left: 130px;
+    top: 30px;
+}
+.container .row .hangman-draw .drawing .rope::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    border: 3px dashed #222;
+    border-radius: 50%;
+    left: 100px;
+    top: 60px;
+    display: none;
+}
+.container .row .hangman-draw .drawing .man .head::before{
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 48px;
+    border: 3px solid #222;
+    border-radius: 50%;
+    left: 106px;
+    top: 66px;
+    display: none;
+}
+.container .row .hangman-draw .drawing .man .body::before{
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 110px;
+    background-color: #222;
+    left: 130px;
+    top: 120px;
+    display: none;
+}
+.container .row .hangman-draw .drawing .man .hands{
+    display: none;
+}
+.container .row .hangman-draw .drawing .man .hands::before,
+.container .row .hangman-draw .drawing .man .hands::after{
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 50px;
+    background-color: #222;
+    left: 150px;
+    top: 128px;
+    transform: rotate(60deg);
+}
+.container .row .hangman-draw .drawing .man .hands::after{
+    left: 110px;
+    transform: rotate(-60deg);
+}
+.container .row .hangman-draw .drawing .man .legs{
+    display: none;
+}
+.container .row .hangman-draw .drawing .man .legs::before,
+.container .row .hangman-draw .drawing .man .legs::after{
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 50px;
+    background-color: #222;
+    left: 150px;
+    top: 215px;
+    transform: rotate(120deg);
+}
+.container .row .hangman-draw .drawing .man .legs::after{
+    left: 110px;
+    transform: rotate(-120deg);
+}
+.container .row .hangman-draw.wrong-1 .drawing,
+.container .row .hangman-draw.wrong-2 .drawing .stand::before,
+.container .row .hangman-draw.wrong-3 .drawing .hang,
+.container .row .hangman-draw.wrong-4 .drawing .rope::before,
+.container .row .hangman-draw.wrong-5 .drawing .man .head::before,
+.container .row .hangman-draw.wrong-6 .drawing .man .body::before,
+.container .row .hangman-draw.wrong-7 .drawing .man .hands,
+.container .row .hangman-draw.wrong-8 .drawing .man .legs{
+    display: block;
+}
+.container .row .letter{
+    width: 50%;
+    height: 280px;
+    background-color: #FFF;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.container .row .letter span.letter-box{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    color: #FFF;
+    background-color: #009688;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    user-select: none;
+}
+.container .row .letter span.letter-box.clicked{
+    background-color: rgba(128, 128, 128, .6);
+    color: #f6f6f6;
+    cursor: auto;
+}
+.container .result{
+    width: 97%;
+    height: 150px;
+    position:  absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.container .result .failed,
+.container .result .successed{
+    text-align: center;
+    background-color: #E91E63;
+    color:#FFF;
+    font-size: 30px;
+    padding: 80px 20px;
+}
+/*End game raw of drawing left and letter right*/
+/*Start letter guess*/
+.container .letter-guess{
+    background-color: #f6f6f6;
+    padding: 10px;
+    text-align: center;
+}
+.container .letter-guess span,
+.container .letter-guess span.white-space{
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-color: #FFF;
+    color: #222;
+    font-weight: bold;
+    border-bottom: 4px solid #222;
+    line-height: 60px;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin:0 10px 10px 0;
+    overflow: hidden;
+}
+.container .letter-guess span.white-space{
+    border:none;
+    position: relative;
+}
+.container .letter-guess span.white-space::before{
+    content: '';
+    position: absolute;
+    height: 4px;
+    width: 20px;
+    background-color: #222;
+    left: 50%;
+    top: 50%;
+    transform:  translate(-50%, -50%);
+
+}/*End letter guess*/
